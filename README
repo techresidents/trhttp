@@ -1,1 +1,8 @@
-Tech Residents Python HTTP Library
+Tech Residents Python Http Library
+
+INSTALL:
+pip install git+ssh://dev.techresidents.com/tr/repos/techresidents/lib/python/trhttp#egg=trhttp
+
+DEVELOPMENT
+mkvirtualenv trhttp
+python setup.py develop
