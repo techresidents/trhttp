@@ -34,8 +34,6 @@ setup(
         'Topic :: System :: Distributed Computing',
         ],
     install_requires=[
-        #Commenting out until dependency_links supports 'git+ssh' urls
-        #or we add our own pypi.
-        #'trpycore>=0.11.0'
+        'trpycore>=0.11.0'
     ]
 )
