@@ -1,6 +1,8 @@
 import os
-import setuptools
-from distutils.core import setup
+#import setuptools
+
+from setuptools import setup
+#from distutils.core import setup
 
 def find_packages():
     packages = []
@@ -31,4 +33,9 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: System :: Distributed Computing',
         ],
+    install_requires=[
+        #Commenting out until dependency_links supports 'git+ssh' urls
+        #or we add our own pypi.
+        #'trpycore>=0.11.0'
+    ]
 )
