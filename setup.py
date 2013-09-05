@@ -1,6 +1,8 @@
 import os
-import setuptools
-from distutils.core import setup
+#import setuptools
+
+from setuptools import setup
+#from distutils.core import setup
 
 def find_packages():
     packages = []
@@ -14,7 +16,7 @@ def find_packages():
 
 setup(
     name='trhttp',
-    version = '0.1.0',
+    version = '0.2.0',
     author = 'Tech Residents, Inc.',
     packages = find_packages(),
     license = open('LICENSE').read(),
@@ -31,4 +33,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: System :: Distributed Computing',
         ],
+    install_requires=[
+        'trpycore>=0.11.0'
+    ]
 )
