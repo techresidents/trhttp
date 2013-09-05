@@ -179,7 +179,7 @@ class RestClient(object):
 
     def _retry_send_request(self, method, path, data=None, headers=None,
             params=None, data_size=None, chunk_size=65535, reset=None):
-
+        
         if reset is None and \
                 hasattr(data, "tell") and hasattr(data, "seek"):
                 pos = data.tell()
@@ -259,7 +259,9 @@ class RestClient(object):
             params=None, data_size=None, chunk_size=65535):
 
             self.connection.putrequest(method, path)
-            for name,value in headers.items():
+            for name, value in headers.items():
+                if not isinstance(value, basestring):
+                    value = str(value)
                 self.connection.putheader(name, value)
             self.connection.endheaders()
 
