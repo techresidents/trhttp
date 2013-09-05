@@ -16,7 +16,7 @@ def find_packages():
 
 setup(
     name='trhttp',
-    version = '0.3.0',
+    version = '0.4-SNAPSHOT',
     author = 'Tech Residents, Inc.',
     packages = find_packages(),
     license = open('LICENSE').read(),
