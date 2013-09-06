@@ -9,15 +9,6 @@ from trpycore.chunk.basic import BasicChunker
 from trhttp.errors import HttpError
 from trhttp.utils import parse_url
 
-class DebugConnection(httplib.HTTPSConnection):
-    def connect(self):
-        sock = socket.create_connection((self.host, self.port),
-                                        self.timeout, self.source_address)
-        if self._tunnel_host:
-            self.sock = sock
-            self._tunnel()
-        self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file)
-
 
 class ResponseContextManager(object):
 
@@ -120,7 +111,7 @@ class RestClient(object):
     def default_headers(self, method, path, data=None, data_size=None):
         data_size = data_size or 0
         headers = {
-            "Content-Length": data_size
+            "Content-Length": str(data_size)
         }
 
         if self.auth_headers:
@@ -164,7 +155,7 @@ class RestClient(object):
 
     def _authenticate(self, force=False):
         if self.authenticator is not None:
-            self.auth_headers = self.authenticator.authenticate(force)
+            self.auth_headers = self.authenticator.authenticate(self, force)
 
     def _normalize_path(self, path, params=None):
         if self.path:
@@ -251,6 +242,7 @@ class RestClient(object):
             #where all future requests will result in an
             #httplib.ImproperConnectionState exception.
             self.connection.close()
+            self.connection = self._create_connection()
             raise
 
         return response
