@@ -4,5 +4,5 @@ class RestAuthenticator(object):
     __metaclass__ = abc.ABCMeta
     
     @abc.abstractmethod
-    def authenticate(force=False):
+    def authenticate(rest_client, force=False):
         return
