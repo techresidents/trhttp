@@ -1,18 +1,8 @@
 import os
-#import setuptools
+from setuptools import setup, find_packages, Extension
 
-from setuptools import setup
-#from distutils.core import setup
-
-def find_packages():
-    packages = []
-    for dir,subdirs,files in os.walk('trhttp'):
-        package = dir.replace(os.path.sep, '.')
-        if '__init__.py' not in files:
-            # not a package
-            continue
-        packages.append(package)
-    return packages
+import ez_setup
+ez_setup.use_setuptools()
 
 setup(
     name='trhttp',
@@ -35,5 +25,8 @@ setup(
         ],
     install_requires=[
         'trpycore>=0.11.0'
-    ]
+    ],
+    dependency_links=[
+        'git+ssh://dev.techresidents.com/tr/repos/techresidents/lib/python/trpycore.git@0.11.0#egg=trpycore-0.11.0'
+    ],
 )
