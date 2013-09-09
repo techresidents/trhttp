@@ -1,22 +1,12 @@
 import os
-#import setuptools
+from setuptools import setup, find_packages, Extension
 
-from setuptools import setup
-#from distutils.core import setup
-
-def find_packages():
-    packages = []
-    for dir,subdirs,files in os.walk('trhttp'):
-        package = dir.replace(os.path.sep, '.')
-        if '__init__.py' not in files:
-            # not a package
-            continue
-        packages.append(package)
-    return packages
+import ez_setup
+ez_setup.use_setuptools()
 
 setup(
     name='trhttp',
-    version = '0.5.0',
+    version = '0.6.0',
     author = 'Tech Residents, Inc.',
     packages = find_packages(),
     license = open('LICENSE').read(),
@@ -34,6 +24,9 @@ setup(
         'Topic :: System :: Distributed Computing',
         ],
     install_requires=[
-        'trpycore>=0.11.0'
-    ]
+        'trpycore>=0.12.0'
+    ],
+    dependency_links=[
+        'git+ssh://dev.techresidents.com/tr/repos/techresidents/lib/python/trpycore.git@0.12.0#egg=trpycore-0.12.0'
+    ],
 )
