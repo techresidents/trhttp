@@ -224,16 +224,17 @@ class RestClient(object):
         except HttpError as error:
             retry = error.status == 401 and \
                     self.authenticator and \
-                    self.last_http_error is None
+                    (self.last_http_error is None or \
+                     self.last_http_error.status != 401)
             self.last_http_error = error
             if retry:
-                self.last_http_error = error
                 self._authenticate(force=True)
                 headers.update(self.auth_headers)
                 response = self._do_request(method=method, path=path,
                             data=data, headers=headers, params=params,
                             data_size=data_size, chunk_size=chunk_size)
                 self.validate_response(response)
+                self.last_http_error = None
             else:
                 raise
         except Exception as e:
