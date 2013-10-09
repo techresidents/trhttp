@@ -6,7 +6,7 @@ ez_setup.use_setuptools()
 
 setup(
     name='trhttp',
-    version = '0.7-SNAPSHOT',
+    version = '0.7.0',
     author = 'Tech Residents, Inc.',
     packages = find_packages(),
     license = open('LICENSE').read(),
